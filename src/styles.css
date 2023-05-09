@@ -1,3 +1,100 @@
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('./assets/fonts/playfairdisplay-variablefont_wght-webfont.woff2') format('woff2'),
+    url('./assets/fonts/playfairdisplay-variablefont_wght-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, 
 body {
-  background-color: black;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Playfair Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 2fr 6fr 1fr;
+}
+
+.header {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  grid-row: 1 / 2;
+  background: rgb(255,198,0);
+  background: linear-gradient(115deg, rgba(255,198,0,1) 25%, rgba(255,198,0,1) 50%, rgba(251,210,66,1) 75%, rgba(251,210,66,1) 100%);
+  padding: 0 0 30px 30px;
+}
+
+.header > h1 {
+  color: #0039FF;
+  padding-left: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-row: 2 / 3;
+  height: 100%;
+  background-color: #e8e5e5;
+}
+
+.search-container {
+  display: flex;
+  gap: 3px;
+  align-items: end;
+}
+
+.search-container > svg {
+  background-color: #b3b3b3;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 1px 2px;
+}
+
+.search-container > svg:hover {
+  background-color: #9b9b9b;
+} 
+
+input {
+  margin: 30px 0 0 30px;
+  border-radius: 10px;
+}
+
+input:focus {
+  border: none;
+  outline: #0039FF solid 2px;
+}
+
+.city-name {
+  padding: 30px 0 0 30px;
+}
+
+.city-name > h2 {
+  font-size: 36px;
+  padding-bottom: 5px;
+}
+
+.city-name > * {
+  margin: 0;
+}
+
+
+.footer {
+  grid-row: -2 / -1;
+  background-color: #e8e5e5;
+  border: 2px solid #747373;
 }
