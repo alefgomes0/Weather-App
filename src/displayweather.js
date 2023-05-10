@@ -141,5 +141,40 @@ export async function displayWeatherData() {
   }
   showPrecipitation();
 
+  function showNextForecast() {
+    const nextDayWrapper = document.createElement('div');
+    nextDayWrapper.classList.add('next-forecast-container');
+
+    for (let i = 1; i < 3; i++) {
+      const nextDayForecast = document.createElement("div");
+      nextDayForecast.classList.add("next-forecast", `day${i}`);
+
+      const nextDayDate = document.createElement("h4");
+      nextDayDate.classList.add("next-date");
+      nextDayDate.textContent = allWeatherInfo[1].forecast.forecastday[i].date;
+
+      const nextDayIcon = new Image();
+      nextDayIcon.classList.add("next-icon");
+      nextDayIcon.src = allWeatherInfo[1].forecast.forecastday[i].day.condition.icon;
+      const nextDayText = document.createElement("h4");
+      nextDayText.classList.add("next-text")
+      nextDayText.textContent = allWeatherInfo[1].forecast.forecastday[i].day.condition.text;
+
+      const nextDayTemp = document.createElement("h4");
+      nextDayTemp.classList.add("next-temp");
+      nextDayTemp.textContent = `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_c}°c / 
+        ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_c}°c`;
+
+      nextDayForecast.appendChild(nextDayDate);
+      nextDayForecast.appendChild(nextDayIcon);
+      nextDayForecast.appendChild(nextDayText);
+      nextDayForecast.appendChild(nextDayTemp);
+      nextDayWrapper.appendChild(nextDayForecast);
+      document.querySelector(".main-content").appendChild(nextDayWrapper);
+    }
+  }   
+  showNextForecast();
+
+
   return console.log(allWeatherInfo);
 }
