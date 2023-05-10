@@ -362,6 +362,7 @@ input:focus {
     grid-template-rows: 1fr 1fr;
     justify-content: center;
     padding-left: 20px;
+    gap: 15px;
   }
 
   .city-name {
@@ -388,26 +389,79 @@ input:focus {
     grid-row: 2 / 3;
     grid-column: 1 / -1;
     justify-self: center;
+    gap: 15px;
     width: 300px;
   }
 
   .weather-condition {
-    grid-row: 2 / 3;
-    align-self: start;
+    grid-row: 1 / 2;
+    align-self: end;
+    padding-bottom: 0;
   }
 
   .feels-like {
     grid-column: 1 / 2;
-    align-self: end;
+    align-self: center;
     padding-bottom: 10px;
   }
 
-  .min-max-temp {
+  .label-feels {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
     align-self: end;
     padding-bottom: 5px;
   }
 
+  .min-max-temp {
+    align-self: start;
+  }
+
+  .label {
+    grid-row: 3 / 4;
+    align-self: end;
+    padding-bottom: 15px;
+  }
+
   .city-precipitation {
+    grid-row: 3 / -1;
+    grid-column: 1 / -1;
+    justify-self: center;
+    gap: 15px;
     width: 300px;
+    height: 231.6px;
+    padding: 10px 0 10px 0;
+  }
+
+  .precipitation {
+    align-self: start;
+  }
+
+  .chance-of-rain {
+    grid-row: 1 / 2;
+    align-self: end;
+    padding-bottom: 0;
+  }
+
+  .total-precipitation {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    align-self: center;
+  }
+
+  .mm {
+    grid-row: 2 / 3;
+    align-self: end;
+    padding-bottom: 0;
+  }
+
+  .humidity {
+    grid-row: 3 / 4;
+    align-self: center;
+  }
+
+  .average-humidity {
+    grid-row: 3 / 4;
+    align-self: end;
+    padding-bottom: 0;
   }
 }
