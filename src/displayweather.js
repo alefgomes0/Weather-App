@@ -7,6 +7,7 @@ export async function displayWeatherData() {
   const weatherForecast = fetchForecastData();
   const allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
 
+
   function showCityName() {
     const weatherWrapper = document.createElement("div");
     weatherWrapper.classList.add("current-weather-wrapper");
@@ -53,6 +54,7 @@ export async function displayWeatherData() {
   }
   showCityName();
 
+  
   function showCurrentWeather() {
     const weatherWrapper = document.querySelector(".current-weather-wrapper");
     const div = document.createElement("div");
@@ -72,15 +74,18 @@ export async function displayWeatherData() {
 
     const feelsLike = document.createElement("h4");
     feelsLike.classList.add("feels-like");
-    feelsLike.textContent = `Feels like: ${allWeatherInfo[0].current.feelslike_c}°c`;
+    feelsLike.textContent = `${allWeatherInfo[0].current.feelslike_c}°c`;
+    const labelFeels = document.createElement("h5");
+    labelFeels.classList.add("label-feels");
+    labelFeels.textContent = "Feels Like";
 
-    const label = document.createElement("h4");
+    const label = document.createElement("h5");
     label.classList.add("label");
-    label.textContent = "Min/Max Temp: ";
+    label.textContent = "Min / Max ";
     const minMaxTemp = document.createElement("h4");
     minMaxTemp.classList.add("min-max-temp");
     minMaxTemp.textContent = ` 
-      ${allWeatherInfo[1].forecast.forecastday[0].day.mintemp_c}°c/
+      ${allWeatherInfo[1].forecast.forecastday[0].day.mintemp_c}°c /
       ${allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_c}°c`;
 
     currentTemperature.appendChild(temperature);
@@ -88,22 +93,53 @@ export async function displayWeatherData() {
     div.appendChild(currentTemperature);
     div.appendChild(weatherCondtion);
     div.appendChild(feelsLike);
-    div.appendChild(label);
+    div.appendChild(labelFeels);
     div.appendChild(minMaxTemp);
+    div.appendChild(label);
     weatherWrapper.appendChild(div);
     document.querySelector(".main-content").appendChild(weatherWrapper);
   }
   showCurrentWeather();
 
+
   function showPrecipitation() {
     const weatherWrapper = document.querySelector(".current-weather-wrapper");
-    const div = document.createElement(div);
+    const div = document.createElement("div");
     div.classList.add("city-precipitation");
 
     const precipitation = document.createElement("h2");
     precipitation.classList.add("precipitation");
+    precipitation.textContent = 
+      `${allWeatherInfo[1].forecast.forecastday[0].day.daily_chance_of_rain}%`;
+    const chanceOfRain = document.createElement("h5");
+    chanceOfRain.classList.add("chance-of-rain");
+    chanceOfRain.textContent = "Chance of Rain";
+
+    const totalPrecipitation = document.createElement("h4");
+    totalPrecipitation.classList.add("total-precipitation");
+    totalPrecipitation.textContent = 
+      `${allWeatherInfo[1].forecast.forecastday[0].day.totalprecip_mm}mm`;
+    const milimeters = document.createElement("h5");
+    milimeters.classList.add("mm");
+    milimeters.textContent = "Total Precipitation";
+
+    const humidity = document.createElement("h4");
+    humidity.classList.add("humidity");
+    humidity.textContent = 
+    `${allWeatherInfo[1].forecast.forecastday[0].day.avghumidity}%`;
+    const averageHumidity = document.createElement("h5");
+    averageHumidity.classList.add("average-humidity");
+    averageHumidity.textContent = "Average Humidity";
     
+    div.appendChild(precipitation);
+    div.appendChild(chanceOfRain);
+    div.appendChild(totalPrecipitation);
+    div.appendChild(milimeters);
+    div.appendChild(humidity);
+    div.appendChild(averageHumidity);
+    weatherWrapper.appendChild(div);
   }
+  showPrecipitation();
 
   return console.log(allWeatherInfo);
 }
