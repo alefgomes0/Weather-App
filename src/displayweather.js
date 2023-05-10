@@ -1,24 +1,109 @@
-import {fetchWeatherData} from './fetchweather.js';
-
+import { fetchWeatherData } from "./fetchweather.js";
+import { fetchForecastData } from "./fetchforecast.js";
 
 export async function displayWeatherData() {
   // const city = document.querySelector('input').value;
-  let cityInfo = await fetchWeatherData();
+  const cityInfo = fetchWeatherData();
+  const weatherForecast = fetchForecastData();
+  const allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
 
   function showCityName() {
-    const div = document.createElement('div');
-    div.classList.add('city-name')
+    const weatherWrapper = document.createElement("div");
+    weatherWrapper.classList.add("current-weather-wrapper");
+    const div = document.createElement("div");
+    div.classList.add("city-name");
 
-    const h2 = document.createElement('h2');
-    h2.textContent = `${cityInfo.location.name}`
-    const h5 = document.createElement('h5');
-    h5.textContent = `${cityInfo.location.region}, ${cityInfo.location.country}`;
+    const h2 = document.createElement("h2");
+    h2.textContent = `${allWeatherInfo[0].location.name}`;
+    const h5 = document.createElement("h5");
+    h5.textContent = `${allWeatherInfo[0].location.region}, ${allWeatherInfo[0].location.country}`;
 
     div.appendChild(h2);
     div.appendChild(h5);
-    document.querySelector('.main-content').appendChild(div);
+    weatherWrapper.appendChild(div);
+
+    document.querySelector(".main-content").appendChild(weatherWrapper);
+
+    const localDay = document.createElement("h4");
+    const dayAndTime = allWeatherInfo[0].location.localtime.split(" ");
+    localDay.classList.add("local-day");
+    localDay.textContent = dayAndTime[0];
+    div.appendChild(localDay);
+
+    const localTime = document.createElement("h4");
+    localTime.classList.add("local-time");
+    div.appendChild(localTime);
+
+    const [hours, minutes] = dayAndTime[1].split(":");
+    // create a Date object with the current date and the local time
+    let clockTime = new Date();
+    clockTime.setHours(hours);
+    clockTime.setMinutes(minutes);
+
+    // update the clock every second
+    setInterval(() => {
+      clockTime.setSeconds(clockTime.getSeconds() + 1);
+      const formattedTime = clockTime.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
+      localTime.textContent = formattedTime;
+    }, 1000);
   }
   showCityName();
 
-  return console.log(cityInfo);
+  function showCurrentWeather() {
+    const weatherWrapper = document.querySelector(".current-weather-wrapper");
+    const div = document.createElement("div");
+    div.classList.add("city-weather");
+
+    const currentTemperature = document.createElement("div");
+    currentTemperature.classList.add("current-temperature");
+
+    const temperature = document.createElement("h2");
+    temperature.textContent = `${allWeatherInfo[0].current.temp_c}°c`;
+    const conditionIcon = new Image();
+    conditionIcon.src = allWeatherInfo[0].current.condition.icon;
+
+    const weatherCondtion = document.createElement("h5");
+    weatherCondtion.classList.add("weather-condition");
+    weatherCondtion.textContent = allWeatherInfo[0].current.condition.text;
+
+    const feelsLike = document.createElement("h4");
+    feelsLike.classList.add("feels-like");
+    feelsLike.textContent = `Feels like: ${allWeatherInfo[0].current.feelslike_c}°c`;
+
+    const label = document.createElement("h4");
+    label.classList.add("label");
+    label.textContent = "Min/Max Temp: ";
+    const minMaxTemp = document.createElement("h4");
+    minMaxTemp.classList.add("min-max-temp");
+    minMaxTemp.textContent = ` 
+      ${allWeatherInfo[1].forecast.forecastday[0].day.mintemp_c}°c/
+      ${allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_c}°c`;
+
+    currentTemperature.appendChild(temperature);
+    currentTemperature.appendChild(conditionIcon);
+    div.appendChild(currentTemperature);
+    div.appendChild(weatherCondtion);
+    div.appendChild(feelsLike);
+    div.appendChild(label);
+    div.appendChild(minMaxTemp);
+    weatherWrapper.appendChild(div);
+    document.querySelector(".main-content").appendChild(weatherWrapper);
+  }
+  showCurrentWeather();
+
+  function showPrecipitation() {
+    const weatherWrapper = document.querySelector(".current-weather-wrapper");
+    const div = document.createElement(div);
+    div.classList.add("city-precipitation");
+
+    const precipitation = document.createElement("h2");
+    precipitation.classList.add("precipitation");
+    
+  }
+
+  return console.log(allWeatherInfo);
 }

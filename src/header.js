@@ -5,6 +5,6 @@ export  default function addCloud() {
   cloud.src = cloudPath;
   cloud.style.width = '40px';
   cloud.style.height = '40px';
-  document.querySelector('.header').appendChild(cloud);
+  document.querySelector('.h1-container').appendChild(cloud);
 }
 

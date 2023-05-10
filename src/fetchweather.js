@@ -7,4 +7,3 @@ export async function fetchWeatherData(city='Salvador Bahia') {
     return err;
   }
 }
-

@@ -1,7 +1,7 @@
 import './styles.css';
 import addCloud from './header.js';
-import {fetchWeatherData} from './fetchweather.js';
 import {displayWeatherData} from './displayweather.js';
+import {displayForecast} from './displayforecast.js';
 
 
 addCloud();
