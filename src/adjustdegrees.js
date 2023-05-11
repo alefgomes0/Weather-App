@@ -1,29 +1,29 @@
 export function adjustDegrees() {
- const displayTemp = document.querySelector(".temp-measure");
- const currentTemperature = document.querySelector(".current-temperature > h2");
- const feelsLike = document.querySelector(".feels-like");
- const currentMinMax = document.querySelector(".min-max-temp");
- const currentMin = Number(document.querySelector(".min-max-temp").textContent.trim().slice(0, 4));
- const currentMax = Number(document.querySelector(".min-max-temp").textContent.slice(-6, -2));
- const nextDayTemp1 = document.querySelector(".day1 > .next-temp");
- const day1MinTemp = Number(document.querySelector(".day1 > .next-temp").textContent.trim().slice(0, 4));
- const day1MaxTemp = Number(document.querySelector(".day1 > .next-temp").textContent.slice(-6, -2));
- const nextDayTemp2 = document.querySelector(".day2 > .next-temp");
- const day2MinTemp = Number(document.querySelector(".day2 > .next-temp").textContent.trim().slice(0, 4));
- const day2MaxTemp = Number(document.querySelector(".day2 > .next-temp").textContent.slice(-6, -2));
-
+  const displayTemp = document.querySelector(".temp-measure");
+  const currentTemperature = document.querySelector(".current-temperature > h2");
+  const feelsLike = document.querySelector(".feels-like");
+  const currentMinMax = document.querySelector(".min-max-temp");
+  const nextDayTemp1 = document.querySelector(".day1 > .next-temp");
+  const nextDayTemp2 = document.querySelector(".day2 > .next-temp");
+ 
   if (displayTemp.classList.contains("celsius")) {
-    currentTemperature.textContent = `${Math.round((Number(currentTemperature.textContent.slice(0, 2)) * 9/5) + 32).toFixed(0)}°F`;
-    feelsLike.textContent = `${Math.round((Number(feelsLike.textContent.slice(0, 2)) * 9/5) + 32).toFixed(0)}°F`;
-    currentMinMax.textContent = `${Math.round((currentMin * 9/5) + 32).toFixed(1)}°F / ${Math.round((currentMax * 9/5) + 32).toFixed(1)}°F`;
-    nextDayTemp1.textContent = `${Math.round((day1MinTemp * 9/5) + 32).toFixed(1)}°F / ${Math.round((day1MaxTemp * 9/5) + 32).toFixed(1)}°F`;
-    nextDayTemp2.textContent = `${Math.round((day2MinTemp * 9/5) + 32).toFixed(1)}°F / ${Math.round((day2MaxTemp * 9/5) + 32).toFixed(1)}°F`;
+    currentTemperature.textContent = `${sessionStorage.getItem("tempF")}°F`;
+    feelsLike.textContent = `${sessionStorage.getItem("feelsF")}°F`;
+    currentMinMax.textContent = `${sessionStorage.getItem("currentMinF")}°F /
+      ${sessionStorage.getItem("currentMaxF")}°F`; 
+    nextDayTemp1.textContent = `${sessionStorage.getItem("day1MinF")}°F /
+    ${sessionStorage.getItem("day1MaxF")}°F`; 
+    nextDayTemp2.textContent = `${sessionStorage.getItem("day2MinF")}°F /
+    ${sessionStorage.getItem("day2MaxF")}°F`; 
   }
   else {
-    currentTemperature.textContent = `${Math.round((Number(currentTemperature.textContent.slice(0, 2)) - 32) * 5/9).toFixed(0)}°C`;
-    feelsLike.textContent = `${Math.round((Number(feelsLike.textContent.slice(0, 2)) - 32) * 5/9).toFixed(0)}°C`;
-    currentMinMax.textContent = `${Math.round((currentMin - 32) * 5/9).toFixed(1)}°C / ${Math.round((currentMax - 32) * 5/9).toFixed(1)}°C`;
-    nextDayTemp1.textContent = `${Math.round((day1MinTemp - 32) * 5/9).toFixed(1)}°C / ${Math.round((day1MaxTemp - 32) * 5/9).toFixed(1)}°C`;
-    nextDayTemp2.textContent = `${Math.round((day2MinTemp - 32) * 5/9).toFixed(1)}°C / ${Math.round((day2MaxTemp - 32) * 5/9).toFixed(1)}°C`;
+    currentTemperature.textContent = `${sessionStorage.getItem("tempC")}°C`;
+    feelsLike.textContent = `${sessionStorage.getItem("feelsC")}°C`;
+    currentMinMax.textContent = `${sessionStorage.getItem("currentMinC")}°C /
+      ${sessionStorage.getItem("currentMaxC")}°C`; 
+    nextDayTemp1.textContent = `${sessionStorage.getItem("day1MinC")}°C /
+    ${sessionStorage.getItem("day1MaxC")}°C`; 
+    nextDayTemp2.textContent = `${sessionStorage.getItem("day2MinC")}°C /
+    ${sessionStorage.getItem("day2MaxC")}°C`; 
   }
-}
+ }

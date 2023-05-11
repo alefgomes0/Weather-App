@@ -6,21 +6,22 @@ import {adjustDegrees} from './adjustdegrees.js';
 
 addCloud();
 displayWeatherData();
+const changeScale = document.querySelector(".temp-measure");
 
-document.querySelector(".temp-measure").addEventListener("click", (e) => {
-  if(e.target.classList.contains("celsius")) {
+changeScale.addEventListener("click", () => {
+  if(changeScale.classList.contains("celsius")) {
     adjustDegrees();
+    changeScale.classList.remove("celsius");
     document.querySelector(".temperature-c").classList.remove("temp-style-display");
     document.querySelector(".temperature-f").classList.add("temp-style-display");
-    e.target.classList.remove("celsius");
   }
   else {
     adjustDegrees();
+    changeScale.classList.add("celsius");
     document.querySelector(".temperature-f").classList.remove("temp-style-display");
     document.querySelector(".temperature-c").classList.add("temp-style-display");
-    e.target.classList.add("celsius");
   }
-})
+});
 
 
 document.querySelector(".search-icon").addEventListener("click", () => {

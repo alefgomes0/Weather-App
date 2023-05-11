@@ -6,7 +6,6 @@ export async function displayWeatherData(city) {
   const weatherForecast = fetchForecastData(city);
   const allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
 
-
   const displayTemp = document.querySelector(".temp-measure");
 
   console.log(allWeatherInfo);
@@ -85,6 +84,16 @@ export async function displayWeatherData(city) {
     label.textContent = "Min / Max ";
     const minMaxTemp = document.createElement("h4");
     minMaxTemp.classList.add("min-max-temp");
+
+    sessionStorage.setItem("tempC", allWeatherInfo[0].current.temp_c);
+    sessionStorage.setItem("feelsC", allWeatherInfo[0].current.feelslike_c);
+    sessionStorage.setItem("currentMinC", allWeatherInfo[1].forecast.forecastday[0].day.mintemp_c);
+    sessionStorage.setItem("currentMaxC", allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_c);
+
+    sessionStorage.setItem("tempF", allWeatherInfo[0].current.temp_f);
+    sessionStorage.setItem("feelsF", allWeatherInfo[0].current.feelslike_f);
+    sessionStorage.setItem("currentMinF", allWeatherInfo[1].forecast.forecastday[0].day.mintemp_f);
+    sessionStorage.setItem("currentMaxF", allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_f);
 
 
     if (displayTemp.classList.contains("celsius")) {
@@ -174,20 +183,27 @@ export async function displayWeatherData(city) {
       nextDayText.classList.add("next-text")
       nextDayText.textContent = allWeatherInfo[1].forecast.forecastday[i].day.condition.text;
 
+      sessionStorage.setItem(`day${i}MinC`, allWeatherInfo[1].forecast.forecastday[i].day.mintemp_c);
+      sessionStorage.setItem(`day${i}MaxC`, allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_c);
+      sessionStorage.setItem(`day${i}MinF`, allWeatherInfo[1].forecast.forecastday[i].day.mintemp_f);
+      sessionStorage.setItem(`day${i}MaxF`, allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_f)
+
+
       const nextDayTemp = document.createElement("h4");
       nextDayTemp.classList.add("next-temp");
 
       if (displayTemp.classList.contains("celsius")) {
         nextDayTemp.textContent = 
-          `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_c}°C / 
-            ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_c}°C`;
+        `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_c}°C /
+         ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_c}°C`;  
+            
       }
       else {
         nextDayTemp.textContent = 
-          `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_f}°F / 
-            ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_f}°F`;
+        `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_f}°F / 
+        ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_f}°F`;  
+            
       }
-
 
 
       nextDayForecast.appendChild(nextDayDate);
@@ -199,6 +215,7 @@ export async function displayWeatherData(city) {
     }
   }   
   showNextForecast();
+
 
   return console.log(allWeatherInfo);
 }
