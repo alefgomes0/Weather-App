@@ -7,6 +7,7 @@ import {adjustDegrees} from './adjustdegrees.js';
 addCloud();
 displayWeatherData();
 const changeScale = document.querySelector(".temp-measure");
+const searchIcon = document.querySelector(".search-icon");
 
 changeScale.addEventListener("click", () => {
   if(changeScale.classList.contains("celsius")) {
@@ -24,7 +25,7 @@ changeScale.addEventListener("click", () => {
 });
 
 
-document.querySelector(".search-icon").addEventListener("click", () => {
+searchIcon.addEventListener("click", () => {
   const query = document.querySelector("input").value;
   const mainContent =  document.querySelectorAll(".main-content > *");
   if (mainContent.length > 0) {
@@ -32,3 +33,8 @@ document.querySelector(".search-icon").addEventListener("click", () => {
   }
   displayWeatherData(query);
 });
+
+
+document.querySelector("input").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") searchIcon.dispatchEvent(new Event("click"));
+})

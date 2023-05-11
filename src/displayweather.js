@@ -1,10 +1,18 @@
 import { fetchWeatherData } from "./fetchweather.js";
 import { fetchForecastData } from "./fetchforecast.js";
+import {handleError} from "./handleerror.js";
 
 export async function displayWeatherData(city) {
-  const cityInfo = fetchWeatherData(city);
-  const weatherForecast = fetchForecastData(city);
-  const allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
+  let allWeatherInfo;
+  try {
+    const cityInfo = fetchWeatherData(city);
+    const weatherForecast = fetchForecastData(city);
+    allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
+  }
+  catch(err) {
+    handleError(err);
+    return 1;
+  }
 
   const displayTemp = document.querySelector(".temp-measure");
 

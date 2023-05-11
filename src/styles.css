@@ -132,6 +132,15 @@ input:focus {
   padding-top: 20px;
 }
 
+.error-message {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  align-self: start;
+  justify-self: center;
+  color: rgb(224, 30, 30);
+  font-size: 24px;
+}
+
 .current-weather-wrapper {
   display: grid;
   grid-template-rows: 1fr;
@@ -428,7 +437,7 @@ input:focus {
   }
 }
 
-@media(max-width: 576px) {
+@media(max-width: 645px) {
   .header {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
