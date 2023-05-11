@@ -1,12 +1,15 @@
 import { fetchWeatherData } from "./fetchweather.js";
 import { fetchForecastData } from "./fetchforecast.js";
 
-export async function displayWeatherData() {
-  // const city = document.querySelector('input').value;
-  const cityInfo = fetchWeatherData();
-  const weatherForecast = fetchForecastData();
+export async function displayWeatherData(city) {
+  const cityInfo = fetchWeatherData(city);
+  const weatherForecast = fetchForecastData(city);
   const allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
 
+
+  const displayTemp = document.querySelector(".temp-measure");
+
+  console.log(allWeatherInfo);
 
   function showCityName() {
     const weatherWrapper = document.createElement("div");
@@ -64,17 +67,15 @@ export async function displayWeatherData() {
     currentTemperature.classList.add("current-temperature");
 
     const temperature = document.createElement("h2");
-    temperature.textContent = `${allWeatherInfo[0].current.temp_c}°c`;
     const conditionIcon = new Image();
     conditionIcon.src = allWeatherInfo[0].current.condition.icon;
 
     const weatherCondtion = document.createElement("h5");
     weatherCondtion.classList.add("weather-condition");
     weatherCondtion.textContent = allWeatherInfo[0].current.condition.text;
-
     const feelsLike = document.createElement("h4");
     feelsLike.classList.add("feels-like");
-    feelsLike.textContent = `${allWeatherInfo[0].current.feelslike_c}°c`;
+    
     const labelFeels = document.createElement("h5");
     labelFeels.classList.add("label-feels");
     labelFeels.textContent = "Feels Like";
@@ -84,9 +85,22 @@ export async function displayWeatherData() {
     label.textContent = "Min / Max ";
     const minMaxTemp = document.createElement("h4");
     minMaxTemp.classList.add("min-max-temp");
-    minMaxTemp.textContent = ` 
-      ${allWeatherInfo[1].forecast.forecastday[0].day.mintemp_c}°c /
-      ${allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_c}°c`;
+
+
+    if (displayTemp.classList.contains("celsius")) {
+      temperature.textContent = `${allWeatherInfo[0].current.temp_c}°C`;
+      feelsLike.textContent = `${allWeatherInfo[0].current.feelslike_c}°C`;
+      minMaxTemp.textContent = ` 
+        ${allWeatherInfo[1].forecast.forecastday[0].day.mintemp_c}°C /
+        ${allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_c}°C`;
+    }
+    else {
+      temperature.textContent = `${allWeatherInfo[0].current.temp_f}°F`;
+      feelsLike.textContent = `${allWeatherInfo[0].current.feelslike_f}°F`;
+      minMaxTemp.textContent = ` 
+        ${allWeatherInfo[1].forecast.forecastday[0].day.mintemp_f}°F /
+        ${allWeatherInfo[1].forecast.forecastday[0].day.maxtemp_f}°F`;
+    }
 
     currentTemperature.appendChild(temperature);
     currentTemperature.appendChild(conditionIcon);
@@ -162,8 +176,19 @@ export async function displayWeatherData() {
 
       const nextDayTemp = document.createElement("h4");
       nextDayTemp.classList.add("next-temp");
-      nextDayTemp.textContent = `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_c}°c / 
-        ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_c}°c`;
+
+      if (displayTemp.classList.contains("celsius")) {
+        nextDayTemp.textContent = 
+          `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_c}°C / 
+            ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_c}°C`;
+      }
+      else {
+        nextDayTemp.textContent = 
+          `${allWeatherInfo[1].forecast.forecastday[i].day.mintemp_f}°F / 
+            ${allWeatherInfo[1].forecast.forecastday[i].day.maxtemp_f}°F`;
+      }
+
+
 
       nextDayForecast.appendChild(nextDayDate);
       nextDayForecast.appendChild(nextDayIcon);
@@ -174,7 +199,6 @@ export async function displayWeatherData() {
     }
   }   
   showNextForecast();
-
 
   return console.log(allWeatherInfo);
 }

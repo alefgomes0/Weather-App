@@ -4,7 +4,7 @@ export async function fetchForecastData(city='Salvador Bahia') {
     return await weatherData.json();
   }
   catch(err) {
-    return err;
+    console.log("wtf");
   }
 }
 

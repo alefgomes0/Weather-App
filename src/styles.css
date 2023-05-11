@@ -1,11 +1,3 @@
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('./assets/fonts/playfairdisplay-variablefont_wght-webfont.woff2') format('woff2'),
-    url('./assets/fonts/playfairdisplay-variablefont_wght-webfont.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-}
-
 *,
 *::before,
 *::after {
@@ -31,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Playfair Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .page-wrapper {
@@ -43,13 +35,13 @@ body {
 
 .header {
   display: grid;
-  grid-template-columns: 1fr 8fr 5fr 3fr 1fr;
+  grid-template-columns: 1fr 8fr 5fr 3fr;
   align-items: end;
   gap: 10px;
   grid-row: 1 / 2;
   background: rgb(255,198,0);
   background: linear-gradient(115deg, rgba(255,198,0,1) 25%, rgba(255,198,0,1) 50%, rgba(251,210,66,1) 75%, rgba(251,210,66,1) 100%);
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .h1-container {
@@ -77,7 +69,8 @@ body {
   justify-content: end;
   justify-items: end;
   grid-row: 1 / 2;
-  grid-column: 4 / 5;
+  grid-column: 3 / 4;
+  padding-bottom: 4px;
 }
 
 .search-icon {
@@ -97,11 +90,34 @@ input {
   border-radius: 10px;
   width: 250px;
   height: 20px;
+  padding-left: 10px;
 }
 
 input:focus {
   border: none;
   outline: #0039FF solid 2px;
+}
+
+.temp-measure {
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 5px 0;
+  width: 90px;
+  background-color: rgba(214,214,214,1);
+  align-self: end;
+  margin: 0;
+}
+
+.temp-measure:hover {
+  background-color: rgba(232,229,229,1);
+}
+
+.temp-style-display {
+  color: #0039FF;
+  font-weight: 600;
+  transform: scale(1.1);
+  font-size: 16px;
 }
 
 .main-content {
@@ -134,6 +150,7 @@ input:focus {
   border-radius: 8px;
   justify-items: center;
   justify-content: center;
+  align-items: center;
   grid-row: 1 / 2;
   grid-column: 1 / 2;
   padding: 0 10px 0 10px;
@@ -151,6 +168,7 @@ input:focus {
   grid-row: 1 / 2;
   grid-column: 1 / -1;
   align-self: center;
+  justify-self: center;
 }
 
 .city-name > h5 {
@@ -332,7 +350,7 @@ input:focus {
   grid-template-rows: repeat(3, 1fr);
   width: clamp(100px, 300px, 350px);
   height: clamp(50, 200px, 200px);
-  padding: 10px;
+  padding: 0 10px 0 10px;
 }
 
 .next-forecast > * {
@@ -414,6 +432,7 @@ input:focus {
   .header {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
+    justify-items: center;
   }
 
   .main-content {
@@ -437,12 +456,15 @@ input:focus {
     margin: 0;
   }
 
+  .temp-measure {
+    align-self: center;
+  }
+
   .current-weather-wrapper {
     grid-column: 1 / -1;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     justify-content: center;
-    padding-left: 20px;
     gap: 15px;
   }
 
@@ -551,6 +573,10 @@ input:focus {
   .next-forecast-container {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
+  }
+
+  .next-forecast {
+    width: 300px;
   }
 
   .day1 {
