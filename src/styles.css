@@ -196,6 +196,7 @@ input:focus {
   align-self: end;
   font-size: 12px;
   text-align: center;
+  padding-bottom: 12px;
 }
 
 .local-day {
