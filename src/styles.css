@@ -186,14 +186,16 @@ input:focus {
   grid-column: 1 / -1;
   align-self: center;
   justify-self: center;
+  text-align: center;
 }
 
 .city-name > h5 {
   font-size: 16px;
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
   grid-column: 1 / -1;
-  align-self: start;
+  align-self: end;
   font-size: 12px;
+  text-align: center;
 }
 
 .local-day {
