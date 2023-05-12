@@ -408,23 +408,27 @@ input:focus {
 }
 
 .day1 {
-  border: 3px solid #C600FF;
+  border: 3px solid #1c7f69;
   grid-column: 2 / 3;
   border-radius: 6px;
 }
 
 .day2 {
-  border: 3px solid #00FFC6;
+  border: 3px solid #C600FF;;
   grid-column: 3 / 4;
   border-radius: 6px;
 }
-
 
 .footer {
   grid-row: -2 / -1;
   background: rgb(166,166,166);
   background: linear-gradient(90deg, rgba(166,166,166,1) 0%, rgba(175,175,175,1) 25%, rgba(195,195,195,1) 50%, rgba(214,214,214,1) 75%, rgba(232,229,229,1) 100%);
   border: 2px solid #747373;
+}
+
+a {
+  text-decoration: none;
+  font-size: 12px;
 }
 
 
