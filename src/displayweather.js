@@ -5,9 +5,7 @@ import {handleError} from "./handleerror.js";
 export async function displayWeatherData(city) {
   let allWeatherInfo;
   try {
-    const cityInfo = fetchWeatherData(city);
-    const weatherForecast = fetchForecastData(city);
-    allWeatherInfo = await Promise.all([cityInfo, weatherForecast]);
+    allWeatherInfo = await Promise.all([fetchWeatherData(city), fetchForecastData(city)]);
   }
   catch(err) {
     handleError(err);
