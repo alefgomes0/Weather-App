@@ -414,7 +414,7 @@ input:focus {
 }
 
 .day2 {
-  border: 3px solid #C600FF;;
+  border: 3px solid #1c7f69;
   grid-column: 3 / 4;
   border-radius: 6px;
 }
